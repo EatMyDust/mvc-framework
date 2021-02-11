@@ -1,3 +1,6 @@
+# Last update 
+Added registration, reorganize models
+
 # MVC framework test version
 This is a test version of MVC framework, which doesn't has registration, restore password and validation.
 

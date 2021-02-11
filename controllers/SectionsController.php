@@ -4,9 +4,7 @@
 namespace app\controllers;
 
 use app\core\Controller;
-use app\models\AuthModel;
 use app\models\Section;
-use app\models\SectionModel;
 
 class SectionsController extends Controller
 {

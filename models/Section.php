@@ -4,6 +4,7 @@ namespace app\models;
 
 class Section extends \app\core\DatabaseModel
 {
+    public $id = 0;
     public $name = '';
     public $description = '';
     public $parentID = 0;
@@ -20,35 +21,35 @@ class Section extends \app\core\DatabaseModel
 
     public function add()
     {
-        return $this->save();
+        return parent::save();
     }
 
     public function edit($id)
     {
-        return $this->update($id);
+        return parent::update($id);
     }
 
     public function removeRecursive($id)
     {
-        foreach($this->getAll(['parentID'=>$id]) as $section) {
-            $this->removeRecursive($section->id);
+        foreach(parent::getAll(['parentID'=>$id]) as $section) {
+            parent::removeRecursive($section->id);
         }
-        return $this->remove(['id'=>$id]);
+        return parent::remove(['id'=>$id]);
     }
 
     public function getChildrens()
     {
-        return $this->findAll(['parentID' => $this->parentID]);
+        return parent::findAll(['parentID' => $this->parentID]);
     }
 
     public function getAll($where = [1=>1])
     {
-        return $this->findAll($where);
+        return parent::findAll($where);
     }
 
     public function getByID($id)
     {
-        return $this->findOne(['id' => $id]);
+        return parent::findOne(['id' => $id]);
     }
 
     public function makeSectionsHierarchy(array $sections, $currentSection = [], $parentID = 0, $depth = 0) {
@@ -69,7 +70,7 @@ class Section extends \app\core\DatabaseModel
     }
 
 
-    public static  function makeSectionsTree(array $sections, $separator = '.') {
+    public static function makeSectionsTree(array $sections, $separator = '.') {
         $return = "";
         foreach ($sections as $section) {
             if($section->current) continue;

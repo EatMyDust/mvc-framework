@@ -42,4 +42,14 @@ class Request
         }
         return $body;
     }
+
+    public function getFolder()
+    {
+        $folder = '';
+        if(Application::$app->controller) {
+            $class = explode('\\', get_class(Application::$app->controller));
+            $folder = strtolower(str_replace("Controller", "", end($class)));
+        }
+        return $folder;
+    }
 }

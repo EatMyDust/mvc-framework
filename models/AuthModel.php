@@ -8,7 +8,6 @@ use app\core\Model;
 
 class AuthModel extends Model
 {
-
     public $login;
     public $password;
 
@@ -20,7 +19,7 @@ class AuthModel extends Model
             echo("wrong login or password");
             return false;
         }
-        if($this->password !== $user->password){
+        if(!password_verify($this->password, $user->password)){
             echo("wrong login or password");
             return false;
         }

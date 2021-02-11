@@ -16,6 +16,8 @@
         //For guest
         $app->router->get('/', [AuthController::class, 'index']);
         $app->router->post('/', [AuthController::class, 'login']);
+        $app->router->get('/signup', [AuthController::class, 'signup']);
+        $app->router->post('/signup', [AuthController::class, 'signup']);
     } else {
         //For authorized
         $app->router->get('/', [SectionsController::class, 'index']);

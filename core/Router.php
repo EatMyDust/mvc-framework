@@ -39,18 +39,21 @@ class Router
             Application::$app->controller = new $callback[0]();
             $callback[0] = Application::$app->controller;
         }
+
         return call_user_func($callback, $this->request, $this->response);
     }
 
     public function renderView($view, $params = [])
     {
         $layoutContent = $this->layoutContent();
+        $view = $this->request->getFolder().'/'.$view;
         $clearRenderView = $this->clearRenderView($view, $params);
         return str_replace("{{CONTENT}}", $clearRenderView, $layoutContent);
     }
 
     protected function layoutContent()
     {
+
         $layout = Application::$app->controller->layout;
         ob_start();
         include_once __DIR__ . "/../view/layout/$layout.php";
@@ -60,8 +63,7 @@ class Router
     public function clearRenderView($view, $params)
     {
         $result = [];
-        foreach ($params as $key => $param)
-        {
+        foreach ($params as $key => $param){
             $result[$key] = $param;
         }
         ob_start();

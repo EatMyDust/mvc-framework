@@ -8,8 +8,8 @@
     <div class="col-12">
         <form method="POST">
             <div class="form-group">
-                <label for="email">Email</label>
-                <input class="form-control" id="email" placeholder="Email" name="login">
+                <label for="email">Login</label>
+                <input class="form-control" id="email" placeholder="Login" name="login">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
