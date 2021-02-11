@@ -82,4 +82,11 @@ class Section extends \app\core\DatabaseModel
         }
         return $return;
     }
+
+    public function rules(): array
+    {
+        return [
+            'name' => [self::RULE_REQUIRED],
+        ];
+    }
 }

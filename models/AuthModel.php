@@ -15,12 +15,8 @@ class AuthModel extends Model
     {
         $user = User::findOne(['login' => $this->login]);
 
-        if(!$user) {
-            echo("wrong login or password");
-            return false;
-        }
-        if(!password_verify($this->password, $user->password)){
-            echo("wrong login or password");
+        if(!$user || !password_verify($this->password, $user->password)) {
+            $this->addError("Wrong login or password", self::RULE_CORRECT);
             return false;
         }
         return Application::$app->login($user);
@@ -29,5 +25,11 @@ class AuthModel extends Model
     public function logout()
     {
         return Application::$app->logout();
+    }
+
+    public function rules(): array
+    {
+        return [
+        ];
     }
 }

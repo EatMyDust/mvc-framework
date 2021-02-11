@@ -23,4 +23,13 @@ class User extends \app\core\DatabaseModel
         $this->password = password_hash($this->password, PASSWORD_DEFAULT);
         return parent::save();
     }
+
+    public function rules(): array
+    {
+        return[
+            'login' => [self::RULE_REQUIRED],
+            'password' => [self::RULE_REQUIRED],
+            'email' => [self::RULE_REQUIRED]
+        ];
+    }
 }

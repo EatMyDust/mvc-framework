@@ -1,8 +1,8 @@
 # Last update 
-Added registration, reorganize models
+Added simple validation for all forms
 
 # MVC framework test version
-This is a test version of MVC framework, which doesn't has restore password and validation.
+This is a test version of MVC framework, which doesn't has restore password.
 
 ## Requirements
 PHP 7.4

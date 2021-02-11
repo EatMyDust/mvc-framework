@@ -7,22 +7,17 @@ use app\models\User;
 
 class AuthController extends \app\core\Controller
 {
-    public function index($request)
-    {
-       return $this->render("login");
-    }
-
     public function login($request, $response)
     {
         $authModel = new AuthModel();
-
         if($request->getMethod() === 'post'){
             $authModel->loadData($request->getBody());
-            if($authModel->login()){
+            if($authModel->validate() && $authModel->login()){
                 $response->redirect('/');
                 return;
             }
         }
+        return $this->render("login", ['model'=>$authModel]);
     }
 
     public function signup($request, $response)
@@ -31,13 +26,13 @@ class AuthController extends \app\core\Controller
 
         if($request->getMethod() === 'post'){
             $user->loadData($request->getBody());
-            if($user->add()){
+            if($user->validate() && $user->add()){
                 $response->redirect('/');
                 return;
             }
         }
 
-        return $this->render("signup");
+        return $this->render("signup", ['model'=>$user]);
     }
 
     public function logout($request, $response)

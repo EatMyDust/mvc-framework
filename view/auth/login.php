@@ -6,6 +6,10 @@
         <h1>Auth page</h1>
     </div>
     <div class="col-12">
+        <? if($result['model']->hasError()): ?>
+            <div class="alert alert-danger" role="alert"><?=$result['model']->getFirstError();?></div>
+        <? endif; ?>
+
         <form method="POST">
             <div class="form-group">
                 <label for="email">Login</label>

@@ -27,12 +27,12 @@ class SectionsController extends Controller
         if($request->getMethod() === 'post')
         {
             $section->loadData($request->getBody());
-            if($section->add()){
+            if($section->validate() && $section->add()){
                 $response->redirect('/');
                 return;
             }
         }
-        return $this->render("modifySection", ["sections"=>$section->makeSectionsHierarchy($section->getAll())]);
+        return $this->render("modifySection", ["model" => $section, "sections"=>$section->makeSectionsHierarchy($section->getAll())]);
     }
 
     public function list($request, $response)
@@ -56,12 +56,14 @@ class SectionsController extends Controller
         if($request->getMethod() === 'post')
         {
             $section->loadData($request->getBody());
-            if($section->edit($sectionID)){
+            if($section->validate() && $section->edit($sectionID)){
                 $response->redirect('/');
                 return;
             }
         }
-        return $this->render("modifySection", ["sections"=>$section->makeSectionsHierarchy($section->getAll(), $currentSection), "section"=>$currentSection]);
+        return $this->render("modifySection", ["model" => $section,
+                                                    "sections"=>$section->makeSectionsHierarchy($section->getAll(), $currentSection),
+                                                    "section"=>$currentSection]);
     }
 
     public function remove($request, $response)
