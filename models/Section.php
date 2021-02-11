@@ -31,8 +31,8 @@ class Section extends \app\core\DatabaseModel
 
     public function removeRecursive($id)
     {
-        foreach(parent::getAll(['parentID'=>$id]) as $section) {
-            parent::removeRecursive($section->id);
+        foreach($this->getAll(['parentID'=>$id]) as $section) {
+            $this->removeRecursive($section->id);
         }
         return parent::remove(['id'=>$id]);
     }
